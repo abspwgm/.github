@@ -1,0 +1,44 @@
+name: New game server
+description: Propose a game for the fleet
+labels: ["new-game"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        The [registry](https://github.com/abspwgm/absolute-game-servers/blob/main/games.json)
+        entry comes first and the image second, so check the
+        [fleet board](https://abspwgm.github.io/absolute-game-servers/) before filing —
+        the game may already be planned or blocked.
+  - type: input
+    id: game
+    attributes:
+      label: Game
+    validations:
+      required: true
+  - type: input
+    id: appid
+    attributes:
+      label: Steam app id of the dedicated server
+      description: The server's app id, not the game's. If the publisher ships no dedicated server, say so here — that makes it `blocked`, not `planned`.
+    validations:
+      required: true
+  - type: dropdown
+    id: runtime
+    attributes:
+      label: Runtime
+      options: ["native", "wine", "jvm", "none"]
+    validations:
+      required: true
+  - type: textarea
+    id: ports
+    attributes:
+      label: Ports
+      description: Protocol and purpose for each, including the query port.
+      placeholder: "2456/udp game, 2457/udp query"
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: Anything that makes it awkward
+      description: Licensing, anti-cheat, a launcher that must be logged in, save data that cannot be backed up while running.

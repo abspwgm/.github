@@ -1,0 +1,33 @@
+name: Feature or change request
+description: Propose something these projects should do and do not
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: The problem
+      description: What you were trying to do, and where it stopped. Describe the problem rather than the solution you have in mind.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: What you would like instead
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: What you tried or considered
+      description: Including the workaround you are using now, if there is one. If an established tool or spec already solves this, name it — we would rather adopt one than build one.
+  - type: dropdown
+    id: scope
+    attributes:
+      label: Does this change a public contract?
+      description: Test keys, CLI flags, environment variables, image tags, published paths. A rename is a breaking change.
+      options:
+        - "No"
+        - "Yes — it renames or removes something callers depend on"
+        - "Not sure"
+    validations:
+      required: true
