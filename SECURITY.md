@@ -54,7 +54,7 @@ credential that reaches a commit is rotated first and reported second.
 
 Every repository carries the same two rulesets — no force push, no deletion,
 linear history, changes through a reviewed pull request, required status checks —
-defined in
-[`governance/`](https://github.com/abspwgm/absolute-game-servers/tree/main/governance)
-and applied by script, so the protection is reviewable and changes to it go
-through a pull request like any code.
+defined in `governance/` in the `absolute-game-servers` repository and applied
+by script, so the protection is reviewable and changes to it go through a pull
+request like any code. That repository is private; the rules it enforces are
+summarised above and in [docs/NEW-REPOSITORY.md](docs/NEW-REPOSITORY.md).

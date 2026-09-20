@@ -47,6 +47,9 @@ substitute a fallback face and get the wordmark wrong.
 
 ## Governance
 
-Branch protection is not configured here. It lives in
-[`absolute-game-servers/governance/`](https://github.com/abspwgm/absolute-game-servers/tree/main/governance)
-and is applied by script to every repository.
+Branch protection is not configured here. It is defined in `governance/` in the
+`absolute-game-servers` repository and applied by script to every repository in
+the organization, including this one. That repository is private, so the
+definitions are not linkable from here; see
+[docs/NEW-REPOSITORY.md](docs/NEW-REPOSITORY.md) for what a new repository gets
+and how to apply it.
