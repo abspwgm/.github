@@ -36,7 +36,10 @@ a mod loader that installed whatever was newest, a remote console shipped with
 `changeme`, a nightly job that drained a CI budget. The point of writing them
 down is that the next project does not have to earn them again.
 
-## Reporting a problem
+## Getting in touch
+
+[**Discord**](https://discord.gg/ufC2RFxxkx) — questions, help getting a server running, and finding
+people to play with.
 
 Bugs and requests go in the affected repository's issues. Security problems go
 through **Report a vulnerability** on that repository's Security tab, never a

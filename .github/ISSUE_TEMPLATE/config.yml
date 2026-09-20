@@ -1,5 +1,8 @@
 blank_issues_enabled: false
 contact_links:
+  - name: Discord
+    url: https://discord.gg/ufC2RFxxkx
+    about: Questions, help running a server, and finding people to play with.
   - name: Security vulnerability
     url: https://github.com/abspwgm/.github/blob/main/SECURITY.md
     about: Never file a security problem as a public issue — report it privately.

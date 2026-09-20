@@ -2,6 +2,7 @@
 
 | You want to | Go here |
 |---|---|
+| Chat, or ask a quick question | [Discord](https://discord.gg/ufC2RFxxkx) — the fastest route for anything that is not yet a bug report |
 | Report a bug | Issues on the affected repository |
 | Ask how something works | Issues on the affected repository, or the docs in that repo |
 | Report a security problem | **Report a vulnerability** on that repository's Security tab — see [SECURITY.md](SECURITY.md) |
