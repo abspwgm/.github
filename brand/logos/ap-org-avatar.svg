@@ -1,6 +1,3 @@
-<!-- VENDORED — do not edit by hand.
-     Source of truth: absolute-power-brand/logos/ap-org-avatar.svg
-     Resync: bash scripts/sync-brand-assets.sh -->
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" font-family="Rajdhani, 'Arial Narrow', sans-serif">
   <!-- Organization avatar (GitHub, Discord, socials). The emblem mark, not the
        wordmark: per BRAND_GUIDELINES.md §5 the full lockup needs 48px of height,

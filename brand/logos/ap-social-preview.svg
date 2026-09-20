@@ -1,6 +1,3 @@
-<!-- VENDORED — do not edit by hand.
-     Source of truth: absolute-power-brand/logos/ap-social-preview.svg
-     Resync: bash scripts/sync-brand-assets.sh -->
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 640" font-family="Rajdhani, 'Arial Narrow', sans-serif">
   <!-- Social preview / Open Graph card, 1280x640 (GitHub's repository and
        organization social preview size; also serviceable as an OG image).

@@ -31,8 +31,13 @@ that is not already public.
 and is private. Do not edit it by hand:
 
 ```sh
-BRAND_REPO=/path/to/absolute-power-brand bash scripts/sync-brand-assets.sh
+python3 scripts/sync_brand.py            # vendor from the brand repo's main
+python3 scripts/sync_brand.py --check    # re-hash only; what CI runs
 ```
+
+`brand/SOURCE.json` pins the upstream commit and a SHA-256 per file, the same
+mechanism and format `absolute-game-servers` uses, rather than a second way of
+doing the same thing.
 
 The organization avatar and the social preview card are uploaded by hand in
 organization settings — GitHub exposes no API for either. The PNGs come from the
