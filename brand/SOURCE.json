@@ -1,12 +1,12 @@
 {
   "repo": "https://github.com/abspwgm/absolute-power-brand.git",
   "ref": "main",
-  "commit": "39b3fa4c32a8c19803d0f9442fd8507e56931ede",
+  "commit": "4b0e4bd9f974a6105a62548c9103f20f11e175d2",
   "synced": "2026-09-20",
   "files": {
-    "logos/ap-gameservers-lockup.svg": "6b03a5e89d564b672523ec8695f662e93fc6450e1ae341a562be8048b13cc051",
+    "logos/ap-gameservers-lockup.svg": "a805b3dafa4168e7aeea4c280eaa092bf225166b4b31c766ee73d916ff9a2aca",
     "logos/ap-org-avatar.svg": "d039a784428380a4530c834a1ca8642063d8a349717f2dc2e27b8d880e96c91c",
-    "logos/ap-social-preview.svg": "057d7fbf75fa2d582699692056cd75f6133ad5f6b2d7f60540bbd96634df84e9",
-    "logos/ap-tcgaming-lockup.svg": "82c025893fba2faeab7241c64fa8cc69034d0804405b114920645806de9b3a70"
+    "logos/ap-social-preview.svg": "79b94cf9b52f9814febc3eda4e0ef07ce60ffc0889db7bb4b2b35b4bd0026803",
+    "logos/ap-tcgaming-lockup.svg": "448fe07ace9cc6b7f840677fb21135dbfeb2a9ef0542f58bd8dbb8efee61e6b9"
   }
 }
