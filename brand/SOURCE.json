@@ -1,7 +1,7 @@
 {
   "repo": "https://github.com/abspwgm/absolute-power-brand.git",
-  "ref": "feat/org-identity",
-  "commit": "026944a8fe3589a34f245c6b808c6498e132ad19",
+  "ref": "main",
+  "commit": "39b3fa4c32a8c19803d0f9442fd8507e56931ede",
   "synced": "2026-09-20",
   "files": {
     "logos/ap-gameservers-lockup.svg": "6b03a5e89d564b672523ec8695f662e93fc6450e1ae341a562be8048b13cc051",
