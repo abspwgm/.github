@@ -5,10 +5,9 @@ body:
   - type: markdown
     attributes:
       value: |
-        The [registry](https://github.com/abspwgm/absolute-game-servers/blob/main/games.json)
-        entry comes first and the image second, so check the
-        [fleet board](https://abspwgm.github.io/absolute-game-servers/) before filing —
-        the game may already be planned or blocked.
+        The registry entry comes first and the image second, so check the
+        [fleet board](https://abspwgm.github.io/absolute-game-servers/) before
+        filing — the game may already be planned or blocked.
   - type: input
     id: game
     attributes:
