@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Security vulnerability
+    url: https://github.com/abspwgm/.github/blob/main/SECURITY.md
+    about: Never file a security problem as a public issue — report it privately.
+  - name: Which games are supported
+    url: https://abspwgm.github.io/absolute-game-servers/
+    about: The fleet board shows what is live, at parity, planned or blocked.
+  - name: How these projects are built
+    url: https://github.com/abspwgm/absolute-standard
+    about: The engineering standard, its security baseline, and the conformance check.
