@@ -31,9 +31,9 @@ then there is nothing to show that we would trust ourselves.
 
 ## How it is built
 
-| | |
-|---|---|
-| the Absolute engineering standard | The engineering standard: process, quality signals, a seven-layer security baseline, and a conformance check that enforces both |
+Every project here is held to the Absolute engineering standard: process,
+quality signals, a seven-layer security baseline, and a conformance check that
+enforces both.
 
 Every clause in the standard is the scar of a real failure on the Valheim image —
 a mod loader that installed whatever was newest, a remote console shipped with

@@ -14,7 +14,7 @@ gh repo create abspwgm/<name> --private --description "<one line>"
 ```
 
 **Private first, always.** A repository becomes public only once its end-to-end
-tier is green — [the standard][std], clause 8.1. Publishing source is a claim
+tier is green — the standard, clause 8.1. Publishing source is a claim
 that it works, and the end-to-end tier is the only evidence for that claim.
 Nothing forces you to publish later; red forbids it, green merely permits it.
 
@@ -26,7 +26,7 @@ Copy the shape from [`absolute-server-template`][tpl] for a game image, or from
 | Path | Why |
 |---|---|
 | `.absolute/policy.yml` | How this project meets each clause (7.1) |
-| `.github/workflows/conformance.yml` | Calls the standard's reusable check (7.2) |
+| `.github/workflows/conformance.yml` | Runs the standard's conformance check (7.2) |
 | `.github/workflows/<fast-tier>.yml` | A signal in under a minute (2.1) |
 | `.github/CODEOWNERS` | `* @abspowergaming` |
 | `SECURITY.md` | Private reporting, and what the repo never contains (L7) |
@@ -113,5 +113,4 @@ repository*, and nothing in it links back out to one — clause 8.2. Generated
 links are guarded by their generator; hand-written prose, install snippets and
 buttons are where stale links actually survive.
 
-[std]: https://github.com/abspwgm/.github
 [tpl]: https://github.com/abspwgm/absolute-server-template

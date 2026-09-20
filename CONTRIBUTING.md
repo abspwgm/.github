@@ -17,9 +17,8 @@ own `CONTRIBUTING.md` overrides this one.
 
 ## What the standard expects of you
 
-These are not house preferences; they are clauses of
-the Absolute engineering standard,
-and the conformance check enforces them.
+These are not house preferences; they are clauses of the Absolute engineering
+standard, and the conformance check enforces them.
 
 | Clause | What it means for a pull request |
 |---|---|

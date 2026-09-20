@@ -10,7 +10,7 @@ Please do not open a public issue for a security problem.
 Use **Report a vulnerability** on the Security tab of the affected repository.
 That opens a private advisory only the maintainers can see. If the repository is
 private, or the Security tab is not available to you, report it against
-[the standard](https://github.com/abspwgm/.github/security/advisories/new)
+[this repository](https://github.com/abspwgm/.github/security/advisories/new)
 and say which project it concerns.
 
 Include the commit, image tag or version, what you did, and what happened. You
@@ -38,13 +38,11 @@ that is pre-release supports its default branch only.
 
 ## How these projects are secured
 
-The posture is defined once, in
-the Absolute engineering standard: clause 6 and
-`security/BASELINE.md`
-set a seven-layer baseline from L1 source to L7 operations, and
-`conformance/check.py`
-compares each repository's declared policy against it. An exception is allowed
-only where it is written down with a reason.
+The posture is defined once, in the Absolute engineering standard: clause 6 and
+its `security/BASELINE.md` set a seven-layer baseline from L1 source to L7
+operations, and its `conformance/check.py` compares each repository's declared
+policy against it. An exception is allowed only where it is written down with a
+reason.
 
 Secrets are never committed. Local configuration uses an untracked `.env` beside
 a committed `.env.example` that documents the required keys without values. A

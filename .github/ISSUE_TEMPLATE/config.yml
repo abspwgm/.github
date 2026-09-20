@@ -9,6 +9,3 @@ contact_links:
   - name: Which games are supported
     url: https://abspwgm.github.io/absolute-game-servers/
     about: The fleet board shows what is live, at parity, planned or blocked.
-  - name: How these projects are built
-    url: https://github.com/abspwgm/.github
-    about: The engineering standard, its security baseline, and the conformance check.
