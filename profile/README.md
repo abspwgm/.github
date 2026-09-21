@@ -12,7 +12,7 @@ guarded by a check instead of by discipline.
 
 Docker images for dedicated servers that update themselves, back up your world,
 and **hold** instead of breaking on patch day. The registry tracks 62 games: 1
-live, 2 at parity, 50 planned, 9 blocked on an upstream that does not ship a
+live, 4 catching up, 48 planned, 9 blocked on an upstream that does not ship a
 dedicated server.
 
 [**The fleet board**](https://abspwgm.github.io/absolute-game-servers/) is the
@@ -21,13 +21,17 @@ live view: every game, its status, and how to run the ones that are ready.
 | | |
 |---|---|
 | [absolute-valheim-server](https://github.com/abspwgm/absolute-valheim-server) | Valheim, vanilla and BepInEx, with an end-to-end disaster-recovery harness |
+| [absolute-rust-server](https://github.com/abspwgm/absolute-rust-server) | Rust, with Oxide/uMod |
 | [absolute-palworld-server](https://github.com/abspwgm/absolute-palworld-server) | Palworld |
+| [absolute-satisfactory-server](https://github.com/abspwgm/absolute-satisfactory-server) | Satisfactory |
 | [absolute-server-template](https://github.com/abspwgm/absolute-server-template) | The template every image above is cut from |
 
-Rust, Satisfactory and 7 Days to Die are being built and are not published yet.
 A server image becomes public once its end-to-end suite is green — something has
-to start it, play against it and restore it before we hand it to anyone. Until
-then there is nothing to show that we would trust ourselves.
+to start it, play against it and restore it before we hand it to anyone.
+
+<!-- unpublished: absolute-7dtd-server -->
+7 Days to Die is being built and is not published yet.
+<!-- /unpublished -->
 
 ## How it is built
 
