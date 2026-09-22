@@ -583,7 +583,8 @@ def main(argv: list[str] | None = None) -> int:
         }, indent=2))
     else:
         for clause, detail in result.failures:
-            print(f"FAIL  [{clause}] {detail}")
+            safe_detail = "redacted: potential secret finding" if clause == "6.1" else detail
+            print(f"FAIL  [{clause}] {safe_detail}")
         if result.failures:
             print(f"\n{len(result.failures)} failure(s), {len(result.passes)} check(s) passed")
         else:
