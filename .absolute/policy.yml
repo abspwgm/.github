@@ -1,0 +1,348 @@
+# Local policy for the abspwgm/.github repository, checked against the Absolute
+# engineering standard (7.1).
+#
+# This repository is the organisation's public face and nothing else. It holds
+# the profile page GitHub renders at the organisation URL, the community health
+# files every other repository inherits when it carries no copy of its own, the
+# issue and pull request templates, and a vendored copy of the organisation's
+# marks. It builds no image, publishes no artifact, runs no service and stores
+# no user state, so a large part of the baseline below is recorded as not
+# applicable with the reason the baseline requires.
+#
+# It must stay public: GitHub honours a profile page and default health files
+# only from a public `.github` repository, including for the private
+# repositories that inherit them. Clause 6.2 therefore binds harder here than
+# anywhere else - nothing in this repository may be anything that is not
+# already public.
+project: dot-github
+standard_version: "1.0.0"
+
+audience: >-
+  a maintainer editing a community health file or the profile page for the
+  first time, who does not yet know that what they change here is inherited by
+  every repository in the organisation, private ones included, and that the
+  file they are looking at is served to the public the moment it merges
+
+contract:
+  - >-
+    The repository name `.github` and its public visibility, which is what
+    makes every inheritance below work
+  - profile/README.md, which GitHub renders as the organisation profile page
+  - >-
+    SECURITY.md, CONTRIBUTING.md, CODE_OF_CONDUCT.md and SUPPORT.md, which are
+    the default for every repository in the organisation that carries no copy
+    of its own; a local file wins outright and nothing is merged
+  - >-
+    .github/ISSUE_TEMPLATE/ (bug_report.yml, feature_request.yml, new_game.yml)
+    and its config.yml contact-links panel, and
+    .github/PULL_REQUEST_TEMPLATE.md, inherited on the same terms
+  - >-
+    brand/logos/*.svg - the vendored marks other repositories and the
+    organisation settings pages cite by path
+  - >-
+    The brand/SOURCE.json shape - repo, ref, commit, synced, and a files map of
+    vendored path to SHA-256 - which is deliberately the same vendoring format
+    the hub repository uses rather than a second way of doing the same thing
+  - >-
+    scripts/sync_brand.py and its two entry points, `--check` (re-hash only, no
+    network, no writes) and the default vendoring run
+  - >-
+    docs/NEW-REPOSITORY.md, which is the cited procedure for creating a
+    repository in this organisation
+
+tiers:
+  fast:
+    gates: push
+    command: python3 scripts/sync_brand.py --check
+    budget: under a second, and with no network
+  merge:
+    gates: merge
+    command: >-
+      python3 scripts/sync_brand.py --check &&
+      python3 .absolute/standard/conformance/check.py --repo . --standard .absolute/standard
+    budget: under a minute
+  release:
+    gates: release
+    command: >-
+      python3 .absolute/standard/conformance/check.py --repo . --standard .absolute/standard
+    budget: >-
+      this repository cuts no release and produces no artifact. Its publication
+      is the merge itself: the moment a change reaches main, GitHub serves the
+      new profile page and hands the new health files to every repository that
+      inherits them. The merge tier is therefore the last gate there is, and
+      the release tier runs the same conformance check rather than pretending
+      to a step that does not exist.
+
+security:
+  layers:
+    L1:
+      requirements:
+        default_branch_protected:
+          status: met
+          verified_by: https://github.com/abspwgm/.github/settings/rules
+          reason: >-
+            The `default-branch` ruleset is active on this repository and
+            carries deletion, non-fast-forward and required-linear-history
+            rules plus a pull_request rule with squash as the only merge
+            method. The definitions it was applied from live in a private
+            repository and are deliberately not linked from this public one
+            (clause 8.2), so the evidence is the applied ruleset itself.
+        required_checks_declared:
+          status: exception
+          exception: required-checks-not-declared-yet
+        secret_scanning_enabled:
+          status: met
+          verified_by: https://github.com/abspwgm/.github/settings/security_analysis
+          reason: >-
+            Secret scanning, push protection, non-provider patterns and
+            validity checks are enabled repository settings, and code scanning
+            runs from GitHub's default CodeQL setup.
+        no_secrets_in_repository:
+          status: met
+          verified_by: .github/workflows/conformance.yml
+          reason: >-
+            The vendored check scans every tracked file for private key blocks
+            and provider token shapes on every push and pull request, and this
+            workflow is what runs it.
+        no_deployment_detail_in_public:
+          status: met
+          verified_by: README.md
+          reason: >-
+            This repository deploys nothing: it has no host, no address, no
+            network layout and no firewall rule to leak, because it describes
+            an organisation rather than a system. The standing rule that
+            nothing which is not already public may enter it is stated in
+            README.md, which is the file a contributor reads before adding
+            anything here.
+        licence_declared:
+          status: exception
+          exception: no-licence-yet
+    L2:
+      requirements:
+        inputs_pinned_immutably:
+          status: met
+          verified_by: .github/workflows/conformance.yml
+          reason: >-
+            The vendored check fails any workflow step whose `uses:` is not
+            pinned to a 40-character commit SHA, so a tag reference cannot
+            merge. Both workflows here are pinned that way today.
+        pins_verified_before_use:
+          status: met
+          verified_by: scripts/sync_brand.py
+          reason: >-
+            brand/ is vendored, not fetched at use time. `--check` re-hashes
+            every vendored file against the SHA-256 recorded in
+            brand/SOURCE.json and exits non-zero on any mismatch, so a mark
+            that was edited in place is refused rather than used.
+        unpinned_input_refused:
+          status: met
+          verified_by: scripts/sync_brand.py
+          reason: >-
+            A vendored file with no recorded hash is refused by name
+            ("untracked file in brand/"), and a recorded file that is missing
+            is refused too, so nothing can sit in brand/ without a pin behind
+            it.
+        pins_move_by_pr:
+          status: met
+          verified_by: https://github.com/abspwgm/.github/settings/rules
+          reason: >-
+            The active `default-branch` ruleset blocks direct pushes to main,
+            so brand/SOURCE.json and every action SHA move only through a pull
+            request.
+        vulnerable_dependencies_block_release:
+          status: not_applicable
+          reason: >-
+            This repository releases nothing, and has no dependency to be
+            vulnerable: its only executable file is a Python script that
+            imports the standard library alone, and neither workflow installs a
+            package.
+      controls:
+        - id: vendored-marks-cannot-drift-in-place
+          description: >-
+            The marks under brand/ are copies of assets owned by a private
+            brand repository, which CI cannot reach to re-fetch. What CI can
+            prove is that nobody edited the copy in place, which is the drift
+            that actually happens, and it proves it by re-hashing rather than
+            by asking anyone to remember (clause 1.3). The check says plainly
+            that it cannot prove the copy is current, instead of implying it.
+          verified_by: .github/workflows/brand-drift.yml
+    L3:
+      requirements:
+        base_image_from_approved_library:
+          status: not_applicable
+          reason: >-
+            This repository builds no image and contains no Dockerfile. Its
+            only code runs on a GitHub-hosted runner or on a maintainer's
+            machine.
+        least_privilege_tokens:
+          status: met
+          verified_by: .github/workflows/conformance.yml
+          reason: >-
+            Every workflow here declares a top-level `permissions: contents:
+            read` and widens nowhere, and the vendored check fails any workflow
+            that declares no top-level permissions at all.
+        no_secrets_in_build_args:
+          status: met
+          verified_by: .github/workflows/conformance.yml
+          reason: >-
+            There is no build, and no workflow in this repository references
+            `secrets.` in any form; the only token in play is the default
+            read-only GITHUB_TOKEN. The vendored check scans workflow files
+            along with everything else for committed credentials.
+        ephemeral_runners:
+          status: met
+          verified_by: .github/workflows/conformance.yml
+          reason: >-
+            Both workflows run on `ubuntu-latest`, a GitHub-hosted runner that
+            is destroyed after the job. Nothing here runs on the
+            organisation's self-hosted pool.
+        fork_pr_cannot_publish:
+          status: not_applicable
+          reason: >-
+            Nothing is published from a workflow here - no image, no package,
+            no release - so a fork pull request has nothing to reach. Its token
+            is read-only in any case.
+    L4:
+      requirements:
+        provenance_and_sbom_attached:
+          status: not_applicable
+          reason: >-
+            No artifact is produced. What this repository "ships" is its own
+            files, served by GitHub from the default branch; there is no build
+            output to describe.
+        only_distributable_content:
+          status: not_applicable
+          reason: No artifact is produced, so there is no payload to inspect.
+        published_only_after_merge_tier:
+          status: not_applicable
+          reason: >-
+            No artifact is produced. Nothing leaves this repository except the
+            merge itself, which the merge tier already gates.
+    L5:
+      requirements:
+        least_privilege_runtime:
+          status: met
+          verified_by: .github/workflows/conformance.yml
+          reason: >-
+            This repository runs no service. Its only execution is GitHub
+            Actions, where both jobs hold a read-only token, run on an
+            ephemeral hosted runner and do nothing privileged.
+        admin_interfaces_private:
+          status: not_applicable
+          reason: >-
+            This repository exposes no interface of any kind, administrative or
+            otherwise. It serves documents.
+        default_credentials_refused:
+          status: not_applicable
+          reason: >-
+            Nothing here authenticates anyone. The repository defines no
+            credential, ships no service with a console, and its one script
+            reads none.
+        fail_closed_on_state_destroying_paths:
+          status: met
+          verified_by: scripts/sync_brand.py
+          reason: >-
+            Vendoring overwrites brand/ and rewrites SOURCE.json, which is the
+            one path here that destroys something. It refuses rather than
+            guesses at every step - a missing upstream file aborts the run
+            before any hash is recorded, and `--check` refuses outright when
+            SOURCE.json is absent instead of treating an empty record as a
+            clean result.
+        honest_health_reporting:
+          status: met
+          verified_by: scripts/sync_brand.py
+          reason: >-
+            The brand check reports what it can actually prove and says so: it
+            verifies that the vendored copy was not edited in place, and states
+            in its own output and its docstring that it cannot prove the copy
+            is current, because that needs the private upstream. A green result
+            here never means more than it can support.
+    L6:
+      requirements:
+        snapshot_before_risk:
+          status: not_applicable
+          reason: >-
+            This repository holds no user state. Everything in it is source
+            under version control; brand/ is vendored output that is
+            reproducible by re-running scripts/sync_brand.py against the
+            recorded upstream commit.
+        hold_on_failed_verification:
+          status: not_applicable
+          reason: >-
+            There is no state, and so no restore whose verification could fail
+            and need holding. (The brand check does refuse rather than proceed
+            on a bad hash, but that is an L2 pin control, not a recovery one.)
+        restore_rehearsed_in_ci:
+          status: not_applicable
+          reason: >-
+            There is nothing to restore. Recovering this repository is a git
+            clone.
+        retention_exercised_by_test:
+          status: not_applicable
+          reason: >-
+            No user state is held, so there is no retention window to test.
+            Git history is the only record kept, and it is kept in full.
+    L7:
+      requirements:
+        scheduled_canary:
+          status: exception
+          exception: no-scheduled-brand-watch
+        one_issue_per_failure_class:
+          status: exception
+          exception: no-scheduled-brand-watch
+        security_policy_published:
+          status: met
+          verified_by: SECURITY.md
+          reason: >-
+            SECURITY.md is published here and is also the default policy every
+            repository in the organisation inherits when it carries no copy of
+            its own.
+        findings_kept_private:
+          status: met
+          verified_by: SECURITY.md
+          reason: >-
+            SECURITY.md routes every report to a private advisory on the
+            affected repository, names this repository as the fallback when the
+            affected one is private or has no Security tab, and says plainly
+            that a security problem never goes in a public issue. Code scanning
+            findings stay in the Security tab, which is not public; no workflow
+            here uploads a finding as an artifact, which on a public repository
+            any signed-in user could read (clause 6.6).
+
+exceptions:
+  - id: required-checks-not-declared-yet
+    reason: >-
+      This repository has no entry in the organisation's required-checks list,
+      so its branch ruleset protects the branch but requires no status check.
+      Conformance is being introduced by this change and has never run on a
+      pull request here; a check that has never reported cannot be required
+      without blocking every pull request in the repository. The entry - the
+      Conformance check, and brand-drift only if its path filter is dropped,
+      because a required check that a filter skips blocks the branch forever -
+      is added in the governance repository once this workflow has a green run
+      on main.
+    expires: "2026-12-31"
+  - id: no-licence-yet
+    reason: >-
+      There is no LICENSE file and the repository declares no licence on
+      GitHub. This is not an oversight to be cleared by picking the usual one:
+      the repository holds community health prose and the organisation's marks
+      side by side, and a blanket permissive licence over the marks would grant
+      a trademark use nobody intended. The answer is a split - a permissive
+      licence for the documents and templates, explicit reserved rights for
+      brand/ - and it is the owner's decision, not this change's. Recorded here
+      rather than quietly marked met, because the requirement is genuinely
+      unmet today.
+    expires: "2026-12-31"
+  - id: no-scheduled-brand-watch
+    reason: >-
+      brand/ is vendored from a private upstream, which is a real external
+      dependency, so L7 cannot honestly be called not applicable here. Nothing
+      runs on a schedule to detect that the vendored marks have fallen behind
+      that upstream, and nothing opens an issue per failure class when a check
+      fails - a red run is noticed by whoever happens to be looking. Both need
+      a job holding credentials for the private repository, which is the
+      organisation-wide scheduled-watch work rather than a copy of it made
+      here. Until then the only guarantee this repository makes about brand/ is
+      the one its check can prove: that the copy was not edited in place.
+    expires: "2027-03-31"
