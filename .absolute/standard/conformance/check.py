@@ -570,10 +570,16 @@ def main(argv: list[str] | None = None) -> int:
     result = run(repo, pathlib.Path(args.standard).resolve(), dt.date.today())
 
     if args.format == "json":
+        json_failures = []
+        for clause, detail in result.failures:
+            if clause == "6.1":
+                json_failures.append({"clause": clause, "detail": "redacted: potential secret finding"})
+            else:
+                json_failures.append({"clause": clause, "detail": detail})
         print(json.dumps({
             "repo": str(repo),
             "passed": len(result.passes),
-            "failures": [{"clause": c, "detail": d} for c, d in result.failures],
+            "failures": json_failures,
         }, indent=2))
     else:
         for clause, detail in result.failures:
