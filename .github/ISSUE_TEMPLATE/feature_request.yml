@@ -1,6 +1,6 @@
 name: Feature or change request
 description: Propose something these projects should do and do not
-labels: ["enhancement"]
+labels: ["type: feature", "status: needs triage"]
 body:
   - type: textarea
     id: problem

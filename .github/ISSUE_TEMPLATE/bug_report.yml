@@ -1,18 +1,26 @@
+# Inherited by every repository that keeps no ISSUE_TEMPLATE/ of its own, which
+# is most of them: the platform and governance repositories, and the apps.
+# The game images keep their own copy, because what triage needs from them is an
+# image digest and a game build number rather than these questions.
+#
+# Labels must exist in the repository or the forge drops them silently
+# (STANDARD.md 4.5). These come from governance/labels.json in the hub.
 name: Bug report
 description: Something behaves differently from what the documentation says
-labels: ["bug"]
+labels: ["type: bug", "status: needs triage"]
 body:
   - type: markdown
     attributes:
       value: |
         Security problems do not go here. Use **Report a vulnerability** on the
-        Security tab so the report stays private.
+        Security tab, or the link in the chooser you just came from, so the
+        report stays private.
   - type: input
     id: version
     attributes:
       label: Version
-      description: Image tag, release tag, or commit SHA. "latest" is not a version — say which one it resolved to.
-      placeholder: "v1.4.2, or ghcr.io/abspwgm/…@sha256:…"
+      description: A release tag, an image digest, or a commit SHA. "latest" is not a version — say which one it resolved to.
+      placeholder: "v1.4.2, or a commit SHA"
     validations:
       required: true
   - type: textarea
@@ -26,7 +34,7 @@ body:
     id: reproduce
     attributes:
       label: How to reproduce
-      description: The smallest sequence that shows it. A compose file or command line beats a description.
+      description: The smallest sequence that shows it. A command line or a short script beats a description.
       render: shell
     validations:
       required: true
@@ -34,14 +42,14 @@ body:
     id: logs
     attributes:
       label: Logs
-      description: The relevant lines, not the whole file. Remove tokens, passwords, IP addresses and world data first.
+      description: The relevant lines, not the whole file. Remove tokens, passwords, addresses and personal data first.
       render: shell
   - type: input
     id: environment
     attributes:
       label: Environment
-      description: OS and version, Docker or Podman version, architecture. For an app, the platform and OS version.
-      placeholder: "Ubuntu 24.04, Docker 27.3, amd64"
+      description: Where it runs and what it runs on — OS and version, and the runtime or browser where that matters.
+      placeholder: "Ubuntu 24.04, Python 3.12"
     validations:
       required: true
   - type: checkboxes

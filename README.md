@@ -15,11 +15,23 @@ once instead of being copy-pasted into each repo and drifting apart.
 | `CONTRIBUTING.md` | Every repo without its own contributing guide |
 | `CODE_OF_CONDUCT.md` | Every repo — Contributor Covenant 2.1, unmodified apart from the reporting contact |
 | `SUPPORT.md` | Every repo |
-| `.github/ISSUE_TEMPLATE/` | The issue forms and the "contact links" panel |
+| `.github/ISSUE_TEMPLATE/` | Every repo without its own `ISSUE_TEMPLATE/` — the forms and the "contact links" panel |
 | `.github/PULL_REQUEST_TEMPLATE.md` | Every repo without its own PR template |
 
 A repository that needs to say something different keeps its own file; the local
 one wins, and there is no merging.
+
+For the issue forms that rule bites harder than it reads. A repository with its
+own `.github/ISSUE_TEMPLATE/` **replaces** this set outright rather than adding
+to it, so one local form withdraws every form below. A repository declares which
+way it goes in `.absolute/policy.yml` (`issue_templates.set`), and the
+conformance check refuses the combination of "inherited" and a local directory.
+
+Labels in these forms must exist in the repository that inherits them. The forge
+drops a label it does not have without a word, and the issue opens unlabelled —
+so the names here are the ones in `governance/labels.json`, applied org-wide by
+`scripts/apply_labels.py` in the hub repository. Adding a label to a form here
+means adding it there first.
 
 This repository must stay **public** for any of that to work, including for the
 private repositories that inherit from it. Nothing in it may contain anything
