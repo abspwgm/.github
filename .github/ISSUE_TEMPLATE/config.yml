@@ -1,3 +1,6 @@
+# The panel under the forms. Every link here must be readable by whoever can
+# see the repository that inherits it — this file reaches public repositories,
+# so it never points into a private one (STANDARD.md 8.2).
 blank_issues_enabled: false
 contact_links:
   - name: Discord
@@ -6,6 +9,6 @@ contact_links:
   - name: Security vulnerability
     url: https://github.com/abspwgm/.github/blob/main/SECURITY.md
     about: Never file a security problem as a public issue — report it privately.
-  - name: Which games are supported
+  - name: Which games are supported, and requesting a new one
     url: https://abspwgm.github.io/absolute-game-servers/
-    about: The fleet board shows what is live, at parity, planned or blocked.
+    about: The fleet board shows what is live, at parity, planned or blocked, and links to each game's repository.
